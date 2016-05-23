@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Formulaire;
 use App\User;
+use Auth;
 class FormulaireController extends Controller
 {
     /**
@@ -30,7 +31,14 @@ class FormulaireController extends Controller
     {
 
         #$forms = Formulaire::where('user_id', 1)->orderBy('created_at','asc')->get();
-        $forms = Formulaire::with('user')->orderBy('created_at','asc')->get();
+        $forms = Formulaire::with('user')
+                ->whereHas('user',function($q)
+                        		{
+                        		  $q->where('users.id', Auth::user()->id );
+                        		}
+                          )
+                ->orderBy('created_at','asc')
+                ->get();
 
         return view('formulaire_list',[
           'formulaires' => $forms

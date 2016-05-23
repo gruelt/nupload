@@ -53,7 +53,7 @@
                     <li><a href="{{ url('/formulaire') }}">Mes Formulaires</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/mesformulaires') }}">ADMIN : Formulaires</a></li>
+                    <li><a href="{{ url('/mesformulaires') }}"><span class="label label-success">Admin</span> Formulaires</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

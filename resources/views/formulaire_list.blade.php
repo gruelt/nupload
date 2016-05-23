@@ -9,6 +9,7 @@
 
                 <div class="panel-body">
                     {{ $note}}
+                  : {{  Auth::user()->name }} #{{  Auth::user()->id }}
                 </div>
 
 <!--
