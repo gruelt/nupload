@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Liste des Formulaires</div>
+                <div class="panel-heading">Formulaires</div>
 
                 <div class="panel-body">
                     {{ $note}}
                 </div>
 
-
+<!--
                 @foreach ($formulaires as $formulaire)
                   {{ $formulaire->name }}
                     @foreach ($formulaire->user as $user)
@@ -19,13 +19,13 @@
                     @endforeach
 <br><br>
                 @endforeach
-
+-->
 
 
 
                 <div class="panel panel-primary">
           			<div class="panel-heading">
-          				<h3 class="panel-title">Liste des utilisateurs</h3>
+          				<h3 class="panel-title">{{ $note}}</h3>
           			</div>
           			<table class="table">
           				<thead>

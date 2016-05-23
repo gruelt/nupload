@@ -34,7 +34,7 @@ class FormulaireController extends Controller
 
         return view('formulaire_list',[
           'formulaires' => $forms
-        ])->withNote('Liste de tous les formulaires');
+        ])->withNote('Mes formulaires');
     }
 
 

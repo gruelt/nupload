@@ -25,5 +25,8 @@ Route::get('/home',function () {
 //routes de la ressource formulaire_list
 Route::resource('formulaire','FormulaireController');
 
+//Route vers tous les formulaires
+Route::get('mesformulaires','FormulaireController@indexall');
+
 
 Route::auth();
