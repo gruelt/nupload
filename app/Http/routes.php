@@ -26,7 +26,16 @@ Route::get('/home',function () {
 Route::resource('formulaire','FormulaireController');
 
 //Route vers tous les formulaires
-Route::get('mesformulaires','FormulaireController@indexall');
+Route::get('formulaires', [
+    'middleware' => ['auth','admin'],
+    'uses' => 'FormulaireController@indexall'
+]);
+
+
+Route::get('profile', [
+    'middleware' => ['auth','admin'],
+    'uses' => 'FormulaireController@indexall'
+]);
 
 
 Route::auth();

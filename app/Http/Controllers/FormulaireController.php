@@ -14,7 +14,7 @@ class FormulaireController extends Controller
   public function __construct()
   {
       $this->middleware('auth');
-      $this->middleware('admin');
+
 
   }
 
@@ -29,7 +29,7 @@ class FormulaireController extends Controller
 
         $forms = Formulaire::orderBy('created_at','asc')->get();
 
-        return view('formulaire_list',[
+        return view('formulaire_list_all',[
           'formulaires' => $forms
         ])->withNote('Liste de tous les formulaires');
     }
@@ -39,7 +39,7 @@ class FormulaireController extends Controller
     public function index()
     {
 
-        #$forms = Formulaire::where('user_id', 1)->orderBy('created_at','asc')->get();
+        
         $forms = Formulaire::with('user')
                 ->whereHas('user',function($q)
                         		{

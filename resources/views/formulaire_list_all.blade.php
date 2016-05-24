@@ -43,17 +43,13 @@
           						<tr>
           							<td>{!! $formulaire->id !!}</td>
           							<td class="text-primary"><strong>{!! $formulaire->name !!}</strong></td>
-
           							<td>{!! link_to_route('formulaire.show', 'Voir', [$formulaire->id], ['class' => 'btn btn-success btn-block']) !!}</td>
-@if (Auth::user()->admin)
           							<td>{!! link_to_route('formulaire.edit', 'Modifier', [$formulaire->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
           							<td>
           								{!! Form::open(['method' => 'DELETE', 'route' => ['formulaire.destroy', $formulaire->id]]) !!}
           									{!! Form::submit('Supprimer', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Vraiment supprimer cet utilisateur ?\')']) !!}
           								{!! Form::close() !!}
           							</td>
-@endif
-
           						</tr>
           					@endforeach
           	  			</tbody>

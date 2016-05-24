@@ -18,14 +18,15 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('admin')->default(false);
-            $table->integer('id_service')->unsigned;
-          /*  $table->foreign('id_service')
-                  ->references('id')
-                  ->on('service')
-                  ->onDelete('restrict')
-                  ->onUpdate('restrict');*/
-            $table->rememberToken();
+            $table->integer('id_service')->unsigned();
             $table->timestamps();
+            $table->foreign('id_service')
+                  ->references('id')
+                  ->on('services')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
+            $table->rememberToken();
+
         });
     }
 
@@ -36,9 +37,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-      /*  Schema::table('user', function(Blueprint $table){
+        Schema::table('users', function(Blueprint $table){
           $table->dropForeign('user_id_service_foreign');
-        });*/
+        });
 
         Schema::drop('users');
     }

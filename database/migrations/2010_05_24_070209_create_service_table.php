@@ -12,7 +12,12 @@ class CreateServiceTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('services',function (Blueprint $table)
+        {
+          $table->increments('id');
+          $table->string('name');
+          $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +27,6 @@ class CreateServiceTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('services');
     }
 }

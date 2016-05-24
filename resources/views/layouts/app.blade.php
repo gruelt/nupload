@@ -52,10 +52,20 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/formulaire') }}">Mes Formulaires</a></li>
                 </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/mesformulaires') }}"><span class="label label-success">Admin</span> Formulaires</a></li>
-                </ul>
 
+
+<!--admin block -->
+@if( !Auth::guest() )
+@if ( Auth::user()->admin)
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/formulaires') }}"><span class="label label-success">Admin</span> Formulaires</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/users') }}"><span class="label label-success">Admin</span> Utilisateurs</a></li>
+                </ul>
+@endif
+@endif
+<!--fin admin block -->
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
