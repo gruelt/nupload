@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('admin')->default(false);
-            $table->integer('id_service')->unsigned();
+            $table->integer('service_id')->unsigned();
             $table->timestamps();
-            $table->foreign('id_service')
+            $table->foreign('service_id')
                   ->references('id')
                   ->on('services')
                   ->onDelete('restrict')
@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function(Blueprint $table){
-          $table->dropForeign('user_id_service_foreign');
+          $table->dropForeign('user_service_id_foreign');
         });
 
         Schema::drop('users');

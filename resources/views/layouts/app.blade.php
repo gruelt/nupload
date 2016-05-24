@@ -61,7 +61,10 @@
                     <li><a href="{{ url('/formulaires') }}"><span class="label label-success">Admin</span> Formulaires</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/users') }}"><span class="label label-success">Admin</span> Utilisateurs</a></li>
+                    <li><a href="{{ url('/user') }}"><span class="label label-success">Admin</span> Utilisateurs</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/service') }}"><span class="label label-success">Admin</span> Services</a></li>
                 </ul>
 @endif
 @endif

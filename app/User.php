@@ -31,4 +31,9 @@ class User extends Authenticatable
       return $this->belongsToMany('App\Formulaire');
     }
 
+    public function service()
+    {
+      return $this->belongsTo('App\Service');
+    }
+
 }

@@ -19,6 +19,11 @@ class FormulaireUserTableSeeder extends Seeder
           'user_id'=> 1,
           'formulaire_id' => $i
         ]);
+        DB::table('formulaire_user')->insert([
+          'user_id'=> 2,
+          'formulaire_id' => $i+1
+        ]);
+
       }
     }
 
