@@ -1,0 +1,256 @@
+
+
+===========================================
+= Compte rendu de la réunion téléphonique =
+= du lundi 23 juin 2014 (10h30--12h00)    =
+= entre ISCOD et le LIMSI                 =
+===========================================
+
+
+
+
+Présents:
+ISCOD: Michel Beigbeder, Antoine Zimmermann
+LIMSI: Cyril Grouin, Pierre Zweigenbaum
+
+
+
+But de la réunion
+=================
+Discussion sur le contenu, la structure et le format des données collectées
+par ISCOD en vue du traitement linguistique par le LIMSI.
+
+Contenu: les données sont les messages, les fils de discussion, les
+forums à collecter sur les sites retenus par le consortium. (Cf. Annexe 1)
+
+Structure:
+Ces données sont du genre graphe.
+Cette structure sera formalisée dans un modèle des discussions.
+
+Format:
+L'identification des entités se fera avec des URI.
+La représentation des informations se fera en RDF.
+Il nous faut harmoniser l'encodage des caractères.
+
+
+Point sur les travaux effectués
+-------------------------------
+
+ISCOD a travaillé sur le site atoute.org et construit un modèle pour la
+structure. Ce modèle n'est pas terminé. Cf. version en cours en Annexe 2.
+ISCOD a essayé l'outil import.io de « Web scraping » sur atoute.org.
+Cet outil permet assez facilement d'extraire (pour ce qui nous concerne)
+les messages grâce à une intervention limitée: fournir quelques exemples de
+ce qu'on veut extraire. Cet outil paraît pouvoir fournir des résultats
+exploitables sur atoute.org. Son utilisation sur des sites avec, par exemple,
+plus de publicité pourrait être moins efficace. La sortie de cet outil peut
+être en .csv. ISCOD reprendra cette sortie pour en faire du RDF.
+Le LIMSI pourra ajouter les informations qu'il extraira dans ce même format
+RDF.
+
+De son côté, le LIMSI a un stage en cours jusque mi-octobre.
+À l'occasion de ce stage, le LIMSI a collecté environ 13800 fils de
+discussion (thème: anxyolitiques, anti-dépresseurs) en janvier 2014.
+Cette collecte a été faite « artisanalement » (wget et scripts ad hoc).
+
+Avec l'hypothèse que _1_ fil correspond à _1_ sujet correspond à _1_
+médicament, on recherche un nom de médicament qui existe dans la liste
+construite à partir du Vidal en français, si on ne trouve pas exactement une
+recherche approchée avec la plus petite « distance d'édition » est faite.
+À noter que cette distance peut ne pas être discriminante, e.g. il existe
+les noms de médicaments _Amaryl_ et _Amarel_. Que faire si un utilisateur
+entre le nom _Amaril_ ?
+Sur cette hypothèse:
+. environ 30% des sujets ont clairement un nom de médicament
+. dans les 70% restant, il y a encore un bon pourcentage de sujets pour
+  lesquels l'utilisation de la distance d'édition ne donne pas de nom de
+  médicament.
+L'extraction des effets est/sera plus difficile.
+
+Les besoins du LIMSI:
+. nom du fil
+. pseudo de l'utilisateur
+. statut de l'utilisateur (doctinaute d'or, invité,...)
+. date du message
+. contenu du message
+. normalisation du nom du médicament
+
+NB: le statut sur atoute.org est d'une autre nature. De plus sur ce site, il y
+a aussi des informations sur le « métier » et sur les « centres d'intérêt ».
+Certains sites ont la notion « d'ami ». Cela permet de construire un graphe
+pour le réseau social des personnes qui adhèrent à un site. LIMSI indique que
+des indices extraits de ce graphe pourrait être utiles, e.g. la centralité
+d'un utilisateur pourrait être en rapport avec le degré de confiance que l'on
+peut accorder à un utilisateur.
+
+Concernant l'identification non ambigüe des médicaments, se renseigner auprès
+des partenaires pharmaciens sur l'existence d'une forme normalisée, au delà du
+nom trouvé dans le Vidal. Ce dernier peut contenir le nom commercial, le nom
+de la molécule active et des laboratoires des fabricants pour les médicaments
+génériques, la forme gallénique (gélules, etc.)
+
+Points particuliers
+-------------------
+__ Citations: le LIMSI préfére que les citations faites dans un message
+ne fassent pas partie du contenu du message lui-même. L'hypothèse est que
+ce contenu est déjà traité dans un autre message. ISCOD conservera cette
+citation dans un champ à part
+__ Anonymisation: on se propose de « brouiller » tous les identifiants (URL,
+pseudo, login) et le « crawl » original est conservé par un partenaire qui
+n'effectuera pas de traitement dessus [Remarque a posteriori: avoir le texte
+des messages suffit à retrouver la page Web d'origine avec un moteur de
+recherche et donc toutes les informations].
+
+Echéancier
+----------
+C'est le postdoc recruté par le LIMSI (début: octobre 2014) qui fera le
+travail effectif pour le projet; le travail en cours de la stagiaire étant une
+preuve de faisabilité.
+ISCOD fournira la description du format et un échantillon extrait du site
+atoute.org mi-juillet. La description définitive du format qui fera partie du
+livrable « Définition du modèle des discussions » (M10) sera plus générale,
+car elle ne sera pas limitée au site atoute.org.
+ISCOD lorsque son postdoc sera recruté pourra fournir ensuite successivement
+les extractions faites des autres sites.
+
+Rappel des livrables ISCOD et LIMSI
+ISCOD M8: Politiques de collecte/propriété des données (2014/07)
+ISCOD M10: Définition du modèle des discussions (2014/09)
+ISCOD M10: Méthodes d'accès aux sites Web (2014/09)
+LIMSI M12: Méthodes de filtrage des données (2014/11)
+LIMSI, DSPIM M15: Ressources pour la détection des médicaments et effets
+indésirables dans les textes : lexiques spécialisé et grand public (2015/02)
+LIMSI M18: Extraction des relations entre médicaments et effets indésirables
+par analyse textuelle (V1) (2015/05)
+
+
+Annexe 1, liste des sites
+=========================
+Extrait du livrable de la tâche 2
+« Définition des éléments de suivi (médicaments, effets indésirables, sites) »
+Allo Docteur* : http://www.allodocteurs.fr/
+Atoute.org : http://www.atoute.org/
+Au feminin.com : http://www.aufeminin.com/forum/show0_14/sante.html
+Carenity* : http://www.carenity.com/
+CareVox* : http://www.carevox.fr/
+ComprendreChoisir.com : http://comprendrechoisir.com/
+Docteurclic* : http://www.docteurclic.com/ 
+Doctissimo : http://www.doctissimo.fr/ 
+Doctoralia : http://www.doctoralia.fr/ 
+e-sante* : http://www.e-sante.fr/
+Eureka Santé* : http://www.eurekasante.fr/ 
+Famili : http://www.famili.fr/ 
+Futura sciences : http://forums.futura-sciences.com/
+L'Internaute Santé* : http://sante.journaldesfemmes.com/ 
+Masantenet* : http://masantenet.com/ 
+Meamedica : http://www.meamedica.fr/
+Medicalorama* : http://www.medicalorama.com/
+Medisite : http://www.medisite.fr/
+Notrefamille.com : http://www.notrefamille.com/ 
+Parlons Santé* : http://www.parlonssante.com/
+PasseportSanté.net : http://www.passeportsante.net/
+Patientsworld : http://www.entrepatients.net/fr 
+Santé AZ au féminin* : http://sante-az.aufeminin.com/ 
+Santé Médecine - Comment ça marche* : http://sante-medecine.commentcamarche.net/
+Vulgaris Médical : http://www.vulgaris-medical.com/
+
+Sites dédiés à une discipline médicale donnée ou à une pathologie donnée :
+AFMtéléthon* : http://afm-telethon.fr/ 
+Allergique.org : http://www.allergique.org/ 
+Association François Aupetit* : http://www.afa.asso.fr/ 
+Association le cancer du sein parlons-en : http://cancerdusein.org/ 
+Association Nationale de Défense contre L'Arthrite Rhumatoïde (ANDAR)* : http://www.polyarthrite-andar.org/
+Association occlusion veineuse rétinienne* : http://www.asso-ovr.fr/ 
+Enfine.com* : http://www.enfine.com/
+Espoir et Vie avec le Cancer du Sein* : http://www.espoir-vie-cancerdusein.fr/forum/
+Fondation pour l'Aide à la Recherche sur la Sclérose en Plaques* : http://www.arsep.org/ 
+ForSEPS* : http://www.forseps.org/ 
+Forum français sur la myasthénie : http://www.myasthenie.org/forum/index.php 
+Forum Vivre sans thyroïde* : www.forum-thyroide.net/phpBB/ftopic8365.html 
+France Lymphome Espoir : http://www.francelymphomeespoir.fr/
+France Lyme, Association de Lutte contre les Maladies Vectorielles à Tiques : http://www.francelyme.fr/  
+La ligue contre le cancer* : http://www.ligue-cancer.net/
+La-sclérose-en-plaques.com : http://la-sclerose-en-plaques.com/index.php 
+Le Forum des Bipotes : http://bipotes.leforum.eu/index.php
+Le Forum des Malades sur les Déficits Immunitaires Primitifs : http://dipdeficitimmunitair.forumgratuit.org/forum
+Les Impatientes : http://www.lesimpatientes.com/
+Maladies rares info services* : http://www.maladiesraresinfo.org/
+Réseau Morphée* : http://www.reseau-morphee.fr/
+Sarcoïdose Infos* : http://www.sarcoidose-infos.com/
+Sida Info Service.org *: http://www.sida-info-service.org/
+Site de l'Association française de la cystite interstitielle* :http://asso.orpha.net/AFCI 
+Sphère-Santé* : http://www.sphere-sante.com/incontinence-information/incontinence.html
+Témoignage : de la dialyse à la transplantation* : http://www.renaloo.com 
+
+Sites dédiés à un médicament donné :
+Association baclofène : http://www.baclofene.com/ 
+Baclofène - Forum baclofène du réseau Aubes : http://www.baclofene.fr/portal.php
+
+
+
+Annexe 2, état de la modélisation au 11 juin 2014
+=================================================
+
+Un fil de discussion
+====================
+	sioc:Thread
+Semantically Interlinked Online Communities
+((Notation Turtle))
+	@prefix sioc: <http://rdfs.org/sioc/ns#>
+	@prefix dc: <http://purl.org/dc/terms/>
+	@prefix v4m: <http://purl.org/v4m/>
+	@prefix foaf: <http://xmlns.com/foaf/0.1/>
+	@prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+	@prefix prov: <http://www.w3.org/ns/prov#>
+Un fil de discussion est un "Container for a series of threaded discussion
+Posts or Items"
+
+URL de la page de départ:
+	e.g.: http://www.atoute.org/n/forum/showthread.php?t=16250
+
+Identification du fil par l'URI suivante:
+	e.g.: http://www.atoute.org/n/forum/showthread.php?t=16250#thread
+
+Un fil a:
+	un titre: dc:title (rdf:langString)
+	un nombre d'affichages: sioc:numviews (xsd:integer)
+		à extraire de la page qui liste les fils
+
+Un message
+==========
+	sioc:Post
+URL d'un message
+	http://www.atoute.org/n/forum/showpost.php?p=4311957&postcount=3
+p=4311957 est l'identifiant d'un message
+postcount=3 est le rang de ce message dans son fil, ça ne fait pas partie
+de l'identification d'un message
+identification d'un message
+	http://www.atoute.org/n/forum/showpost.php?p=4311957
+
+Un message dans un fil de discussion a:
+	un auteur: dc:creator
+	une date et une heure de publication: dc:created (xsd:datetime)
+	un titre: dc:title (rdf:langString)
+	un contenu brut: sioc:content (rdf:HTML)
+	un contenu textuel: v4m:textContent (rdf:langString)
+	une/des citation(s):
+		prov:
+		pour atoute: un contenu (d'origine non identifiable)
+			     un auteur présumé
+		le type de citation est de type sio:SIO_000299
+
+? Une citation
+? ============
+? 	sioc:Post
+? 
+Un utilisateur
+==============
+	sioc:UserAccount
+identification d'un auteur
+	http://www.atoute.org/n/forum/member.php?u=6729#user
+Un utilisateur:
+	un pseudo: foaf:nick
+	une date de naissance: foaf:birthday
+	localisation: foaf:based_near
+	métier: 
+	centre d'intérêt: foaf:interest

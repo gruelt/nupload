@@ -66,6 +66,13 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/service') }}"><span class="label label-success">Admin</span> Services</a></li>
                 </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/nuxeoparse') }}"><span class="label label-success">XML</span> Parse</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ route('import.list') }}"><span class="label label-success">XML</span> Importer</a></li>
+                </ul>
 @endif
 @endif
 <!--fin admin block -->

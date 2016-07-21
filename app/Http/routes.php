@@ -40,5 +40,18 @@ Route::get('profile', [
     'uses' => 'FormulaireController@indexall'
 ]);
 
+Route::get('nuxeotest','NuxeoController@test');
+
+Route::get('nuxeoparse','NuxeoController@parse');
+
+//Liste des imports possibles
+Route::get('import/list','NuxeoController@importlist')->name('import.list');
+
+//Importer un dossier
+//Route::get('import/go/{import}','NuxeoController@import')->name('import.go');
+Route::get('import/go/{import}','NuxeoController@import')->name('import.go');
+
+//montrer le dossier à Importer
+Route::get('import/show/{import}','NuxeoController@parse')->name('import.show');
 
 Route::auth();

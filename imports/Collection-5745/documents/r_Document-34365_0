@@ -1,0 +1,194 @@
+User-Agent: SOGoMail 2.2.9a
+X-Forward: 127.0.0.1
+MIME-Version: 1.0
+from: "Rodolphe LE RICHE" <leriche@emse.fr>
+subject: Fwd: RE: CR discussion PSA pour ARNOUVO 3
+message-id: <7152-54380300-3-7c2f0d80@135109336>
+to: "BENOIT GUILLAUME" <benoit.guillaume@mpsa.com>
+content-type: text/plain; charset="utf-8"
+date: Fri, 10 Oct 2014 18:01:58 +0200
+content-length: 6106
+content-transfer-encoding: quoted-printable
+
+Cher Beno=C3=AEt, 
+
+Je me permets de copier ci-dessous les r=C3=A9flexions que nous nous so=
+mmes faits suite =C3=A0 ta proposition de cas test.
+En r=C3=A9sum=C3=A9 : nous trouvons ce cas int=C3=A9ressant et aimerion=
+s le creuser avec toi. Mais ce cas implique une reconfiguration du proj=
+et Arnouvo trop importante (enjeux et consortium) pour les 3 jours ouvr=
+ables restants avant la date limite de pr=C3=A9-d=C3=A9position. De ce =
+fait, nous ne red=C3=A9poserons pas Arnouvo cette ann=C3=A9e =C3=A0 l'a=
+ppel g=C3=A9n=C3=A9rique de l'ANR. Peut =C3=AAtre un autre appel si nou=
+s trouvons ?
+
+Bon we, 
+
+Rodolphe
+ 
+
+-------- Message original -------- 
+Sujet: RE: CR discussion PSA pour ARNOUVO 3 
+Date: Vendredi 10 Octobre 2014 17:36 CEST 
+De: Thierry Yalamas | PHIMECA <yalamas@phimeca.com> 
+Pour: "rodolphe le riche" <leriche@emse.fr>,"jean-marc bourinet" <Jean-=
+Marc.Bourinet@ifma.fr>,"Mathieu Balesdent" <mathieu.balesdent@onera.fr>=
+ 
+R=C3=A9f=C3=A9rences: <5437F1C8.6010202@emse.fr>
+ 
+ 
+Bonjour Rodolphe et bonjour =C3=A0 tous,
+
+Je pense que le cas propos=C3=A9 par PSA est loin d'=C3=AAtre inint=C3=A9=
+ressant mais qu'il 
+n'est effectivement pas vraiment en phase avec ce qui =C3=A9tait pr=C3=A9=
+vu dans le 
+projet. Par ailleurs, je suis d'accord sur le fait qu'il est trop tard =
+pour 
+r=C3=A9orienter fortement le projet en y incluant des experts acad=C3=A9=
+miques de 
+l'automatique (m=C3=AAme si on pourrait sans doute en trouver =C3=A0 
+Clermont-Ferrand).
+
+Je vous rejoins donc toi et Mathieu dans ce choix de ne pas red=C3=A9po=
+ser cette 
+ann=C3=A9e =C3=A0 l'ANR.
+
+Pour l'avenir, je confirme que Fabien Mangeant d'EADS IW (ou plut=C3=B4=
+t Airbus 
+Group Innovation d=C3=A9sormais) m'a indiqu=C3=A9 vouloir mettre en pla=
+ce une sorte de 
+groupe de r=C3=A9flexion dans l'ann=C3=A9e pour faire avancer l'analyse=
+ (m=C3=AAme si le 
+cadre est encore loin d'=C3=AAtre clair). Dans une d=C3=A9marche invers=
+e, il pourrait 
+=C3=A9galement =C3=AAtre int=C3=A9ressant de creuser l'analyse du besoi=
+n de PSA hors 
+contexte d'urgence ANR ?
+
+Bon week-end =C3=A0 tous,
+Thierry
+
+
+
+Dr. Thierry YALAMAS
+Directeur G=C3=A9n=C3=A9ral - Associ=C3=A9
+
+  <http://webmail.phimeca.com/home/yalamas@phimeca.com/Briefcase/logo =
+
+signature.jpg>
+
+18/20 Bd de Reuilly - 75012 Paris
+34 Rue de Sarli=C3=A8ve - 63800 Cournon d'Auvergne
+Fixe : +33 (0) 4 73 28 93 66 | Mob : +33 (0) 6 80 83 59 29
+www.phimeca.com | Viadeo 
+<http://www.viadeo.com/fr/company/phimeca-engineering-sa>  | LinkedIn =
+
+<http://www.linkedin.com/company/1012024?trk=3Dprof-exp-company-name>
+
+
+
+-----Message d'origine-----
+De : rodolphe le riche [mailto:leriche@emse.fr]
+Envoy=C3=A9 : vendredi 10 octobre 2014 16:49
+=C3=80 : Thierry Yalamas; jean-marc bourinet; Mathieu Balesdent
+Objet : CR discussion PSA pour ARNOUVO 3
+
+Chers Thierry, Jean-Marc et Mathieu,
+
+Rappel de contexte : Pour resoumettre ARNOUVO =C3=A0 l'ANR, nous =C3=A9=
+tions en
+qu=C3=AAte d'un cas test avec un end-user nous permettant de comparer d=
+es
+m=C3=A9thodes type MDO + incertitudes =C3=A0 des pratiques industrielle=
+s actuelles.
+Divers contacts ont =C3=A9t=C3=A9 pris, parmis lesquels seul PSA restai=
+t en lice
+et nous attendions leur retour aujourd'hui.
+
+(une ligne de suspense)
+
+Beno=C3=AEt Guillaume (expert optimisation / robustesse PSA) a rencontr=
+=C3=A9 ce
+matin des personnes des m=C3=A9tiers de l'automatique.
+Il proposerait un cas test li=C3=A9 aux v=C3=A9hicules sans chauffeurs =
+: les
+sous-syst=C3=A8mes seraient compos=C3=A9s, chacun, de capteurs type rad=
+ar et de
+boucles de contr=C3=B4le. Il y aurait des crit=C3=A8res de performance =
+(rapidit=C3=A9,
+stabilit=C3=A9, ...) =C3=A0 la fois =C3=A0 l'=C3=A9chelle des sous-syst=
+=C3=A8mes et =C3=A0 l'=C3=A9chelle
+globale du v=C3=A9hicule. Il n'y a pas de couplages "physiques", i.e., =
+pas de
+sorties de sous-syst=C3=A8mes entrant dans d'autres sous-syst=C3=A8mes.=
+ La notion
+d'incertitudes, =C3=A0 ce stade de la conversation, n'a pas =C3=A9t=C3=A9=
+ explicit=C3=A9e.
+Les variables d'optimisation sont les param=C3=A8tres de la r=C3=A9gula=
+tion.
+PSA met deux conditions =C3=A0 sa participation =C3=A0 ARNOUVO : 1) uti=
+lisation de
+leurs vrais outils, bas=C3=A9s sur simulink et 2) participation au cons=
+ortium
+de sp=C3=A9cialistes acad=C3=A9miques de l'automatique.
+
+
+Apr=C3=A8s discussion avec Mathieu, il nous semble que ce cas test ne r=
+emplit
+pas vraiment les objectifs que nous nous =C3=A9tions donn=C3=A9s:
+* absence de couplages physiques,
+* ce cas ne nous donnerait pas facilement la possibilit=C3=A9 de compar=
+er une
+pratique actuelle de gestion des incertitudes et couplages =C3=A0 une
+approche MDO.
+De plus, la contrainte "membre du consortium acad=C3=A9mique expert en=
+
+automatique" ne semble pas facile =C3=A0 remplir dans l'=C3=A9tat actue=
+l du
+consortium.
+
+Pour toutes ces raisons et le peu de temps dont nous disposons pour
+faire les ajustements n=C3=A9cessaires (notamment de consortium), Mathi=
+eu et
+moi pensons qu'il est pr=C3=A9f=C3=A9rable de ne pas resoumettre ARNOUV=
+O =C3=A0 l'ANR
+dans l'appel g=C3=A9n=C3=A9rique. Il n'en reste pas moins que le projet=
+ est
+int=C3=A9ressant, et qu'il faudra trouver un moyen de le faire avancer.=
+ Les
+retours de EADS-IW allaient dans le sens d'un groupe de recherche pour=
+
+faire avancer l'analyse (sous contr=C3=B4le de Thierry) ?
+
+Qu'en pensez vous ?
+
+Bon WE,
+
+Rodolphe
+
+-- 
+Rodolphe Le Riche
+CNRS Permanent Research Associate, HDR
+Ecole des Mines de Saint-Etienne and LIMOS
+158, cours Fauriel,
+42023 Saint-Etienne cedex 2 - France
+(office 511, Espace Fauriel)
+Tel : (33) (0) 477420023
+Fax : (33) (0) 477426666
+leriche@emse.fr http://www.emse.fr/~leriche
+
+ 
+ 
+ 
+-- 
+Rodolphe Le Riche
+CNRS Permanent Research Associate, HDR
+Ecole des Mines de Saint-Etienne and LIMOS
+158, cours Fauriel,
+42023 Saint-Etienne cedex 2 - France
+(office 511, Espace Fauriel)
+Tel : (33) (0) 477420023
+Fax : (33) (0) 477426666
+leriche@emse.fr http://www.emse.fr/~leriche
+ 

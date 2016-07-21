@@ -53,6 +53,11 @@ return [
             'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
+        'imports' => [
+            'driver' => 'local',
+            'root' => '/USERS/phpinfo/laravel/nupload/imports',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

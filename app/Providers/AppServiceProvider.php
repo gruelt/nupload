@@ -23,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+      //Enregistre en proviver la classe Nuxeo
+      $this->app->bind(
+      'App\Gestion\NuxeoGestion'
+
+    );
+
+
     }
 }
