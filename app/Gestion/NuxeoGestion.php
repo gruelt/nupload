@@ -10,7 +10,7 @@ class NuxeoGestion
     {
       $this->url=env('NUXEOAPI_URL');
       $this->user=env('NUXEOAPI_USER');
-      $this->pass=env('NUXEOAPI_pass');
+      $this->pass=env('NUXEOAPI_PASS');
     }
 
 
@@ -30,9 +30,39 @@ class NuxeoGestion
     }
 
     ##crée un répertoire dans Nuxeo dans l'espace indiqué.
-    public function createFolder($place,$parameters)
+    public function createDocument($place="1f992202-3b57-4e14-a649-f370b15c0e55",$type="File",$name,$parameters="") //place = id du conteneur , $type = File/Folder
     {
-      
+
+      $url=$this->url."/id/".$place;
+      $reponse=\Guzzle::post($url,[
+        'auth' => [ $this->user, $this->pass],
+        'headers'  => ['content-type' => 'application/json'],
+        'body' =>json_encode(
+            ['entity-type' => 'document',
+            'name' => 'mondocument',
+            'type' => $type,
+            'properties' =>
+                  ['dc:title' => $name]])
+      ]);
+
+
+
+
+
+      #extrait le body de la reponse
+
+      $out=$reponse->getBody();
+
+
+
+      #decode le json en array
+      $out=json_decode($out,true);
+
+      print_r($out);
+
+      //retourne l'uid du dossier créé
+      return $out['uid'];
+
     }
 
 }

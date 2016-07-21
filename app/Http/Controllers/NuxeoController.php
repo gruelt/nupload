@@ -44,7 +44,12 @@ class NuxeoController extends Controller
 
       $note="Parse OK ".count($this->nuxeotab)." objets";
 
-      return view('generic_view')->withNote('Message '.$note)->withDatas([]);
+      $nuxeo=new NuxeoGestion;
+
+      $id=$nuxeo->createDocument("1f992202-3b57-4e14-a649-f370b15c0e55","Folder","laravel super folder avec des trucs dedans");
+      $id=$nuxeo->createDocument($id,"File","laravel super file");
+
+      return view('generic_view')->withNote('Message '.$note." ".$id)->withDatas([]);
 
   }
 
@@ -60,6 +65,8 @@ class NuxeoController extends Controller
 
     //reconstruit le chemin de telle sorte
     $pathtoxml="/".$import."/".$import.".xml";
+
+    $note="";
 
     //recupere le contenu du fichier
     $xmlcontent = Storage::disk('imports')->get($pathtoxml);
@@ -180,7 +187,7 @@ if($ds_id=="Collection-16730")
   }
 
 
-
+//test : creation d'un repertoire
   public function test()
   {
     $nuxeo=new NuxeoGestion;
