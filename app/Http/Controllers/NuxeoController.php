@@ -46,8 +46,18 @@ class NuxeoController extends Controller
 
       $nuxeo=new NuxeoGestion;
 
-      $id=$nuxeo->createDocument("1f992202-3b57-4e14-a649-f370b15c0e55","Folder","laravel super folder avec des trucs dedans");
-      $id=$nuxeo->createDocument($id,"File","laravel super file");
+      //crée un folder
+      $idfolder=$nuxeo->createDocument("1f992202-3b57-4e14-a649-f370b15c0e55","Folder","laravel folder".date("Y-m-d H:i:s"));
+      //crée le document
+      $id=$nuxeo->createDocument($idfolder,"File","laravel ".date("Y-m-d H:i:s"));
+      //crée un batch e trécupère son id
+      $batchid=$nuxeo->createbatch();
+      //on upload le fichier
+      $upload=$nuxeo->uploadFile('patate.jpg',"patate.jpg",$batchid);
+
+      print $upload;
+
+      $nuxeo->linkUploadedFile($id,$batchid);
 
       return view('generic_view')->withNote('Message '.$note." ".$id)->withDatas([]);
 
