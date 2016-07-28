@@ -48,7 +48,7 @@ class NuxeoController extends Controller
 
       //crée un folder
       //$idfolder=$nuxeo->createDocument("1f992202-3b57-4e14-a649-f370b15c0e55","Folder","laravel folder".date("Y-m-d H:i:s"));
-
+      /*
       $idfolder="1f992202-3b57-4e14-a649-f370b15c0e55";
       //crée le document
       $id=$nuxeo->createDocument($idfolder,"File","laravel ".date("Y-m-d H:i:s"));
@@ -57,9 +57,40 @@ class NuxeoController extends Controller
       //on upload le fichier
       $upload=$nuxeo->uploadFile('patate.jpg',"patate.jpg",$batchid);
 
-      print_r($upload);
+
 
       $nuxeo->linkUploadedFile($id,$batchid);
+      */
+
+      #$id=$nuxeo->createDocumentWithFile("1f992202-3b57-4e14-a649-f370b15c0e55","BBB62.mp4","Une video de lapin");
+
+
+
+      //$note="<a href=https://ged.mines-telecom.fr/nuxeo/nxdoc/default/".$id."/view_documents>Lien vers document</a>";
+
+      //test : creation à plat des docs
+      $ok=0;
+      foreach ($this->nuxeotab as $key => $value) {
+        print "key ". $key ;
+        print_r($value);
+        print"<br><br>";
+
+        if($value['type']=='Document' && $ok==0)
+        {
+          /*print "<font color=red>import !!</font><br>";
+
+          $pathtodoc="/".$import."/documents/r_".$key;
+          print $pathtodoc."<br>";*/
+          $pathtodoc="".$import."/documents/r_".$key."_0";
+          $id=$nuxeo->createDocumentWithFile("1f992202-3b57-4e14-a649-f370b15c0e55",$pathtodoc,$value['title']);
+          $ok=1;
+        }
+
+      }
+
+
+      //$note="";
+      $id="";
 
       return view('generic_view')->withNote('Message '.$note." ".$id)->withDatas([]);
 

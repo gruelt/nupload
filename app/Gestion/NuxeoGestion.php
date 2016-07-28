@@ -82,8 +82,8 @@ class NuxeoGestion
     #decode le json en array
     $out=json_decode($out,true);
 
-    print "Batchid : ";
-    print_r($out);
+    /*print "Batchid : ";
+    print_r($out);*/
 
     //retourne l'uid du dossier/fichier créé
     return $out['batchId'];
@@ -98,43 +98,23 @@ class NuxeoGestion
 
     if(!Storage::disk('imports')->has($file))
     {
-
+      print "$file introuvable ****";
       return 0;
     }
     else {
-    /*print  Storage::disk('imports')->url($file)."<br>";
-    print 'good -> /USERS/phpinfo/laravel/nupload/imports/'.$file.'<br>';
-    print system('pwd').'<br>';*/
+
     }
 
 
-    $body=fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r');
+    //$body=fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r');
+    $body=Storage::disk('imports')->get($file);
 
-    /*$reponse=\Guzzle::post($url,[
-      'auth' => [ $this->user, $this->pass],
-      'headers'  => ['X-File-Name' => $filename],
-      'multipart' => [
-          [
-              'name'     => 'image',
-              'contents' =>  fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r')  //  Storage::disk('imports')->url($file)
-              //'contents' =>  '@/USERS/phpinfo/laravel/nupload/imports/'.$file
-
-          ]
-        ]
-
-    ]);*/
-
+    //requete d'upload du fichier
     $reponse=\Guzzle::post($url,[
       'auth' => [ $this->user, $this->pass],
       'headers'  => ['X-File-Name' => $filename],
       'body' => $body
     ]);
-
-
-
-
-    print "<br><br>réponse upload<br>";
-    print_r($reponse);
 
     #extrait le body de la reponse
 
@@ -156,6 +136,24 @@ class NuxeoGestion
 
 
   }
+//crée un document complet , upload le fichier dans le contenaeur spécifié
+  public function createDocumentWithFile($nuxeocontainer="1f992202-3b57-4e14-a649-f370b15c0e55",$file,$filename,$metadata="")
+  {
+
+
+
+    //crée le document
+    $id=$this->createDocument($nuxeocontainer,'File',$filename.date("Y-m-d H:i:s"));
+    //crée un batch e trécupère son id
+    $batchid=$this->createbatch();
+    //on upload le fichier
+    $upload=$this->uploadFile($file,$filename,$batchid);
+
+    $this->linkUploadedFile($id,$batchid);
+
+    //renvoi de l'id du document créé
+    return $id;
+  }
 
 
 
@@ -170,22 +168,6 @@ class NuxeoGestion
     //creation de l'url ID du fichier
     $documentidurl=$this->url."/id/".$documentid;
 
-    $json=json_encode(
-        [
-          'entity-type' => 'document',
-          'properties' =>
-              ['file:content' =>
-                  [
-                    'upload-batch' => $batchid ,
-                    'upload-fileId' => 0
-                  ]
-              ]
-        ]);
-
-        print $json."****";
-
-    print "<br><br><br>docurl: ".$documentidurl."<br>";
-    print "batchid: ".$batchid."<br>";
     $reponse=\Guzzle::put($documentidurl,
     [
       'auth' => [ $this->user, $this->pass],
@@ -213,12 +195,12 @@ class NuxeoGestion
     $out=$reponse->getBody();
 
 
-    print "<br><br>réponse linkage<br>";
+    /*print "<br><br>réponse linkage<br>";*/
 
     #decode le json en array
     $out=json_decode($out,true);
 
-    print_r($out);
+    /*print_r($out);*/
 
     //retourne l'uid du dossier/fichier créé
     return $out['uid'];

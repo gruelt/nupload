@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                  {{$note}}
+                  {{$note}}>
                 </div>
 
 
