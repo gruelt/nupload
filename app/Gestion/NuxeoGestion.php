@@ -86,7 +86,7 @@ class NuxeoGestion
     print_r($out);
 
     //retourne l'uid du dossier/fichier créé
-    return $out['batchId']."dd";
+    return $out['batchId'];
 
   }
 
@@ -107,25 +107,39 @@ class NuxeoGestion
     print system('pwd').'<br>';*/
     }
 
-    $reponse=\Guzzle::post($url,[
+
+    $body=fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r');
+
+    /*$reponse=\Guzzle::post($url,[
       'auth' => [ $this->user, $this->pass],
       'headers'  => ['X-File-Name' => $filename],
       'multipart' => [
           [
               'name'     => 'image',
-              //'contents' =>  fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r')  //  Storage::disk('imports')->url($file)
-              'contents' =>  fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r')
+              'contents' =>  fopen('/USERS/phpinfo/laravel/nupload/imports/'.$file,'r')  //  Storage::disk('imports')->url($file)
+              //'contents' =>  '@/USERS/phpinfo/laravel/nupload/imports/'.$file
 
           ]
         ]
 
+    ]);*/
+
+    $reponse=\Guzzle::post($url,[
+      'auth' => [ $this->user, $this->pass],
+      'headers'  => ['X-File-Name' => $filename],
+      'body' => $body
     ]);
+
+
+
+
     print "<br><br>réponse upload<br>";
     print_r($reponse);
 
     #extrait le body de la reponse
 
     $out=$reponse->getBody();
+    #$out=$reponse->send();
 
 
 
@@ -156,9 +170,23 @@ class NuxeoGestion
     //creation de l'url ID du fichier
     $documentidurl=$this->url."/id/".$documentid;
 
-    print "<br><br><br>docurl:".$documentidurl."<br>";
-    print "batchid:".$batchid."<br>";
-    $reponse=\Guzzle::get($documentidurl,
+    $json=json_encode(
+        [
+          'entity-type' => 'document',
+          'properties' =>
+              ['file:content' =>
+                  [
+                    'upload-batch' => $batchid ,
+                    'upload-fileId' => 0
+                  ]
+              ]
+        ]);
+
+        print $json."****";
+
+    print "<br><br><br>docurl: ".$documentidurl."<br>";
+    print "batchid: ".$batchid."<br>";
+    $reponse=\Guzzle::put($documentidurl,
     [
       'auth' => [ $this->user, $this->pass],
       'headers'  => ['content-type' => 'application/json'],
@@ -169,7 +197,7 @@ class NuxeoGestion
                 ['file:content' =>
                     [
                       'upload-batch' => $batchid ,
-                      'upload-fileId' => 0
+                      'upload-fileId' => "0"
                     ]
                 ]
           ])
