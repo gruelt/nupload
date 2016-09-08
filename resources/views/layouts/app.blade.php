@@ -71,7 +71,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('import.list') }}"><span class="label label-success">XML</span> Importer</a></li>
+                    <li><a href="{{ route('import.list') }}"><span class="label label-success">XML</span> Import Docushare</a></li>
                 </ul>
 @endif
 @endif

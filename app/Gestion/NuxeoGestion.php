@@ -143,7 +143,7 @@ class NuxeoGestion
 
 
     //crée le document
-    $id=$this->createDocument($nuxeocontainer,'File',$filename.date("Y-m-d H:i:s"));
+    $id=$this->createDocument($nuxeocontainer,'File',$filename);
     //crée un batch e trécupère son id
     $batchid=$this->createbatch();
     //on upload le fichier
@@ -204,6 +204,57 @@ class NuxeoGestion
 
     //retourne l'uid du dossier/fichier créé
     return $out['uid'];
+
+  }
+
+
+  //Creation de la descendance ( arborescence descendante du document)
+
+  public function createChilds($nuxeo_id,$ds_id,$nuxeotab,$nuxeoroot)
+  {
+    print $nuxeo_id." -> ".$ds_id."<br>";
+    print_r($nuxeotab);
+    print_r($nuxeotab[$ds_id]['childs']);
+
+    if(!isset($nuxeotab[$ds_id]['childs']))
+    {
+      print "rien!!!!";
+      return 0;
+    }
+
+      foreach ($nuxeotab[$ds_id]['childs'] as $id_child => $child) {
+        print "$ds_id -->Child ".$child."<br>";
+
+        //Si c'est un répertoire
+        if($nuxeotab[$child]['type']=='Collection')
+        {
+          $id=$this->createDocument($nuxeo_id,'Folder',$nuxeotab[$child]['title']);
+          print "<br>****child****<br>";
+          print_r($child);
+          print "ùùùùù";
+          //si le dossier à des childs
+          $ichilds=count($nuxeotab[$child]['childs']);
+          print $ichilds." enfants pour $child<br><br>";
+          print_r($nuxeotab[$child]['childs']);
+
+          $this->createChilds($id,$child,$nuxeotab,$nuxeoroot);
+        }
+
+        //Si c'est un fichier
+        if($nuxeotab[$child]['type']=='Document')
+        {
+
+          $pathtodoc="".$nuxeoroot."/documents/r_".$child."_0";
+
+          print $pathtodoc."path";
+
+          $id=$this->createDocumentWithFile($nuxeo_id,$pathtodoc,$nuxeotab[$child]['title']);
+
+
+
+        }
+
+      }
 
   }
 

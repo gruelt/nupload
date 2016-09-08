@@ -13,6 +13,12 @@ class NuxeoController extends Controller
 
   //Tableau d'import de Nuxeo
   public $nuxeotab;
+
+  //collection racine de l'import
+  public $nuxeoroot;
+
+
+
   //localisation du repertoire d'import
   public   $nuxeoimportfolder="/USERS/phpinfo/laravel/nupload/imports/";
 
@@ -68,26 +74,49 @@ class NuxeoController extends Controller
 
       //$note="<a href=https://ged.mines-telecom.fr/nuxeo/nxdoc/default/".$id."/view_documents>Lien vers document</a>";
 
+      //creation du document racine "nuxeoroot"
+      print $this->nuxeoroot;
+
+      #print_r($this->nuxeotab);
+
+      $id=$nuxeo->createDocument("1f992202-3b57-4e14-a649-f370b15c0e55",'Folder',$this->nuxeotab[$this->nuxeoroot]['title']);
+
+      //creation de la descendance ( arborescence )
+
+      $out=$nuxeo->createChilds($id,$this->nuxeoroot,$this->nuxeotab,$this->nuxeoroot);
+
+
+
       //test : creation à plat des docs
+      /* dev desactive = creation a plat
+
+
       $ok=0;
       foreach ($this->nuxeotab as $key => $value) {
+        print "racine =".$this->nuxeoroot;
         print "key ". $key ;
         print_r($value);
         print"<br><br>";
 
-        if($value['type']=='Document' && $ok==0)
+
+        if($value['type']=='Document')
         {
           /*print "<font color=red>import !!</font><br>";
 
           $pathtodoc="/".$import."/documents/r_".$key;
-          print $pathtodoc."<br>";*/
+          print $pathtodoc."<br>";*//*
           $pathtodoc="".$import."/documents/r_".$key."_0";
           $id=$nuxeo->createDocumentWithFile("1f992202-3b57-4e14-a649-f370b15c0e55",$pathtodoc,$value['title']);
           $ok=1;
         }
 
-      }
 
+
+
+
+
+      }
+      dev deactive fin*/
 
       //$note="";
       $id="";
@@ -127,7 +156,7 @@ class NuxeoController extends Controller
     //$file=fopen($xmlfile);
 
     foreach ($xml as $id => $dsobject) {
-      //print_r($dsobject);
+      #print_r($dsobject);
 
 
       //Type de document
@@ -163,12 +192,21 @@ class NuxeoController extends Controller
       //Listre des contenus de la collection
       $ds_childs="";
       $ds_child="";
+      $ds_child=array();
       $ds_childs=$dsobject->destinationlinks->containment;
+      $i_father=0;
 
       foreach ($ds_childs as $child) {
         $ds_child[]=(string)$child;
+
       }
 
+      //si aucun enfant et que c'est une collection, c'est la racine d'import
+      if(count($dsobject->sourcelinks->containment)==0 && $ds_type=="Collection")
+      {
+
+        $this->nuxeoroot=$ds_id;
+      }
 
       //Le propriétaire de l'objet
       $ds_owner=(string)$dsobject->destinationlinks->owner;
