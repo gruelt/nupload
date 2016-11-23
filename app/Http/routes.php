@@ -54,4 +54,10 @@ Route::get('import/go/{import}','NuxeoController@import')->name('import.go');
 //montrer le dossier à Importer
 Route::get('import/show/{import}','NuxeoController@parse')->name('import.show');
 
+//Routage Docushare / Nuxeo -> Collections
+Route::get('/docushare/dsweb/View/{collection}','RedirectController');
+
+//Routage Docushare / Nuxeo -> Documents
+Route::get('/docushare/dsweb/Get/{Document}/{DocumentName}','RedirectController');
+
 Route::auth();

@@ -2,6 +2,8 @@
 
 namespace App\Gestion;
 use Storage;
+use DB;
+
 class NuxeoGestion
 {
 
@@ -30,7 +32,7 @@ class NuxeoGestion
     }
 
     ##crée un document dans Nuxeo dans l'espace indiqué : que ce soit file ou folder
-    public function createDocument($place="1f992202-3b57-4e14-a649-f370b15c0e55",$type="File",$name,$parameters="") //place = id du conteneur , $type = File/Folder
+    public function createDocument($place="1f992202-3b57-4e14-a649-f370b15c0e55",$type="File",$name,$parameters="",$log=false) //place = id du conteneur , $type = File/Folder
     {
 
       $url=$this->url."/id/".$place;
@@ -49,6 +51,7 @@ class NuxeoGestion
 
 
 
+
       #extrait le body de la reponse
 
       $out=$reponse->getBody();
@@ -58,7 +61,14 @@ class NuxeoGestion
       #decode le json en array
       $out=json_decode($out,true);
 
-      //print_r($out);
+      $nuxid=$out['uid'];
+
+      //insertion dans la table des redirections sharemines -> Nuxeo
+      if($log!=false)
+      {
+        #$log='test';
+        db::insert("INSERT INTO redirect (id, type, ds_id, nux_id) VALUES (NULL, '$type', '$log', '$nuxid')");
+      }
 
       //retourne l'uid du dossier/fichier créé
       return $out['uid'];
@@ -137,13 +147,13 @@ class NuxeoGestion
 
   }
 //crée un document complet , upload le fichier dans le contenaeur spécifié
-  public function createDocumentWithFile($nuxeocontainer="1f992202-3b57-4e14-a649-f370b15c0e55",$file,$filename,$metadata="")
+  public function createDocumentWithFile($nuxeocontainer="1f992202-3b57-4e14-a649-f370b15c0e55",$file,$filename,$metadata="",$ds_id=false)
   {
 
 
 
     //crée le document
-    $id=$this->createDocument($nuxeocontainer,'File',$filename);
+    $id=$this->createDocument($nuxeocontainer,'File',$filename,'',$ds_id);
     //crée un batch e trécupère son id
     $batchid=$this->createbatch();
     //on upload le fichier
@@ -213,8 +223,7 @@ class NuxeoGestion
   public function createChilds($nuxeo_id,$ds_id,$nuxeotab,$nuxeoroot)
   {
     print $nuxeo_id." -> ".$ds_id."<br>";
-    print_r($nuxeotab);
-    print_r($nuxeotab[$ds_id]['childs']);
+
 
     if(!isset($nuxeotab[$ds_id]['childs']))
     {
@@ -228,14 +237,10 @@ class NuxeoGestion
         //Si c'est un répertoire
         if($nuxeotab[$child]['type']=='Collection')
         {
-          $id=$this->createDocument($nuxeo_id,'Folder',$nuxeotab[$child]['title']);
-          print "<br>****child****<br>";
-          print_r($child);
-          print "ùùùùù";
+          $id=$this->createDocument($nuxeo_id,'Folder',$nuxeotab[$child]['title'],'',$child);
           //si le dossier à des childs
           $ichilds=count($nuxeotab[$child]['childs']);
-          print $ichilds." enfants pour $child<br><br>";
-          print_r($nuxeotab[$child]['childs']);
+
 
           $this->createChilds($id,$child,$nuxeotab,$nuxeoroot);
         }
@@ -246,9 +251,9 @@ class NuxeoGestion
 
           $pathtodoc="".$nuxeoroot."/documents/r_".$child."_0";
 
-          print $pathtodoc."path";
 
-          $id=$this->createDocumentWithFile($nuxeo_id,$pathtodoc,$nuxeotab[$child]['title']);
+
+          $id=$this->createDocumentWithFile($nuxeo_id,$pathtodoc,$nuxeotab[$child]['title'],'',$child);
 
 
 
